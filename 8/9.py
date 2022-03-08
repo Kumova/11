@@ -18,6 +18,7 @@ def write_with_sort(direct):
         print(files)
         with open('all.txt', 'w') as f:
             for file in files:
+                f.write(f.name)
                 f.writelines(file)
                 f.write('\n')
 
