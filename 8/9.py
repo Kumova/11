@@ -1,25 +1,16 @@
-import os
-import glob
-from os import path
+my_list = ['1.txt', '2.txt', '3.txt']
+dict = []
+for i in my_list:
+    my_dict = {}
+    with open(i, 'r', encoding='utf-8') as file:
+        my_dict['name_file'] = i
+        lines = file.readlines()
+        my_dict['count_lines'] = len(lines)
+        my_dict['lines'] = lines
+        dict.append(my_dict)
+res=sorted(dict, key=lambda x: x['count_lines'])
+#print(res)
 
-def comparator(doc):
-    return len(doc)
-
-def write_with_sort(direct):
-    if path.exists(direct):
-        files = []
-        pattern = '*.txt'
-        glob_path = os.path.join(direct, pattern)
-        list_files = glob.glob(glob_path)
-        for file in list_files:
-            with open(file) as f:
-                files.append(f.readlines())
-        files.sort(key=comparator)
-        print(files)
-        with open('all.txt', 'w') as f:
-            for file in files:
-                f.write(f.name)
-                f.writelines(file)
-                f.write('\n')
-
-write_with_sort(input())
+with open('listfile.txt', 'w') as f:  
+    for listitem in res:
+        f.write('%s\n' % listitem)
